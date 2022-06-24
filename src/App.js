@@ -8,6 +8,7 @@ import zhCN from '/node_modules/antd/lib/locale/zh_CN'
 import moment from 'moment'
 import 'moment/locale/zh-cn'
 moment.locale('zh-cn')
+
 function App() {
   return (
     <ConfigProvider locale={zhCN}>
