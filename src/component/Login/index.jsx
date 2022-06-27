@@ -16,10 +16,10 @@ export default function Login() {
       <p className="loginTitle">任务管理系统</p>
       <Form form={form} onFinish={handleClick} >
         <Form.Item label="账号" name='name' rules={nameValid}>
-          <Input />
+          <Input autoComplete="off" />
         </Form.Item>
         <Form.Item label="密码" name='password' rules={passwordValid}>
-          <Input.Password />
+          <Input.Password autoComplete="off" />
         </Form.Item>
         <Button type="primary" size="middle" block htmlType="submit">登录</Button>
       </Form>
