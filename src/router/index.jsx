@@ -6,17 +6,16 @@ import {
   Navigate
 } from "react-router-dom"
 import { Spin } from 'antd'
-import RoutersList from './staticRouter'
+import staticRouter from './staticRouter'
 function routerCom(value) {
+  if (value.redirect) {
+    return <Route path={value.path} key={value.path} exact={value.exact} element={<Navigate to={value.redirect}
+      replace={true} />} />
+  }
   if (value.routes) {
     return (
-      <Route key={value.path} path={value.path}>
-        <value.component>
-          {value.routes.map(item => {
-            return routerCom(item)
-          })
-          }
-        </value.component>
+      <Route key={value.path} path={value.path} exact={value.exact} element={<value.component />}>
+        routerCom(item)
       </Route>
     )
   } else {
@@ -29,13 +28,12 @@ function routerCom(value) {
 export default function Routers() {
   return (
     <Router>
-      <Suspense fallback={<Spin tip="loading..." />}>
+      <Suspense fallback={<div className="routerSpin"><Spin tip="loading..." /></div>}>
         <Routes>
-          <Route path='/' element={<Navigate to='/login' replace={true} />} />
-          {RoutersList.map(item => {
+          {staticRouter.map(item => {
             return routerCom(item)
-          })}
-          <Route path='*' element={<Navigate to='/error' replace={true} />} />
+          })
+          }
         </Routes>
       </Suspense>
     </Router>

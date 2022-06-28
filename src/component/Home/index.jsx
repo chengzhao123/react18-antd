@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Outlet } from 'react-router-dom'
 import { Button } from "antd"
 export default function Home() {
     const [count, setCount] = useState(0)
@@ -38,6 +39,7 @@ export default function Home() {
                 <span>当前的count3数值{counts.count3}</span>
                 <Button onClick={() => handleCount('1', '3')}>count3+</Button>
             </div>
+            <Outlet />
         </div>
     )
 }
