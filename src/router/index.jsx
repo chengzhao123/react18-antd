@@ -8,21 +8,29 @@ import {
 import { Spin } from 'antd'
 import staticRouter from './staticRouter'
 function routerCom(value) {
+  //如果存在重定向路由
   if (value.redirect) {
-    return <Route path={value.path} key={value.path} exact={value.exact} element={<Navigate to={value.redirect}
-      replace={true} />} />
+    return (
+      <Route path={value.path} key={value.path} exact={value.exact} element={
+        <Navigate to={value.redirect} replace={true} />} />
+    )
   }
-  if (value.routes) {
+  //如果存在子路由
+  if (value.children) {
     return (
       <Route key={value.path} path={value.path} exact={value.exact} element={<value.component />}>
-        routerCom(item)
+        {
+          value.children.map(item => {
+            return routerCom(item)
+          })
+        }
       </Route>
     )
-  } else {
-    return (
-      <Route key={value.path} path={value.path} exact={value.exact} element={<value.component />} />
-    )
   }
+  //不存在重定向和子路由
+  return (
+    <Route key={value.path} path={value.path} exact={value.exact} element={<value.component />} />
+  )
 }
 /** 组件 **/
 export default function Routers() {
@@ -30,9 +38,10 @@ export default function Routers() {
     <Router>
       <Suspense fallback={<div className="routerSpin"><Spin tip="loading..." /></div>}>
         <Routes>
-          {staticRouter.map(item => {
-            return routerCom(item)
-          })
+          {
+            staticRouter.map(item => {
+              return routerCom(item)
+            })
           }
         </Routes>
       </Suspense>

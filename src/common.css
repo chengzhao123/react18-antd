@@ -8,3 +8,11 @@
   margin: 0 0;
   text-align: center;
 }
+.menuClassName {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  /* box-sizing: border-box;
+  border-right: 1px solid black; */
+}
