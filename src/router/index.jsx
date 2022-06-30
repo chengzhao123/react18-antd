@@ -7,6 +7,7 @@ import {
 } from "react-router-dom"
 import { Spin } from 'antd'
 import staticRouter from './staticRouter'
+import waveRouter from './waveRouter'
 function routerCom(value) {
   //如果存在重定向路由
   if (value.redirect) {
@@ -34,12 +35,13 @@ function routerCom(value) {
 }
 /** 组件 **/
 export default function Routers() {
+  var routerList = [...staticRouter, ...waveRouter]
   return (
     <Router>
       <Suspense fallback={<div className="routerSpin"><Spin tip="loading..." /></div>}>
         <Routes>
           {
-            staticRouter.map(item => {
+            routerList.map(item => {
               return routerCom(item)
             })
           }

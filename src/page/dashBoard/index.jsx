@@ -1,12 +1,47 @@
 import React from "react"
 import { Outlet } from "react-router-dom"
 import MenuCom from '../../component/menu'
+import waveRouter from "../../router/waveRouter"
+import logo from '../../logo.svg'
+import { Layout } from 'antd'
+const { Header, Sider, Content } = Layout
+function getMenuList(list, arr) {
+    list.map(itemOne => {
+        if (!itemOne.hidden) {
+            if (itemOne.children && itemOne.children.length) {
+                arr.push({ key: itemOne.path, label: itemOne.title, children: [] })
+                return getMenuList(itemOne.children, arr[arr.length - 1].children)
+            }
+            return arr.push({ key: itemOne.path, label: itemOne.title })
+        }
+        return arr
+    })
+    return arr
+}
 export default function DashBoard() {
+    let showMenuList = getMenuList(waveRouter, [])
     return (
-        <div>
-            <MenuCom theme="dark" mode="inline" menuStyle={{width: 256}} />
-            {/** 子路由界面 */}
-            <Outlet/>
-        </div>
-    )   
+        <Layout style={{ height: document.documentElement.clientHeight }}>
+            <Sider width={256}>
+                <div className="menuLogoDiv">
+                    <img src={logo} alt="" />
+                    <span>Ant Design</span>
+                </div>
+                <MenuCom
+                    theme="dark"
+                    mode="inline"
+                    menuStyle={{ width: 256, height: document.documentElement.clientHeight - 60, overflowY: 'scroll' }}
+                    showMenuList={showMenuList}
+                />
+            </Sider>
+            <Layout>
+                <Header className="navDiv">add</Header>
+                <Layout>
+                    <Content className="contentDiv">
+                        <Outlet />
+                    </Content>
+                </Layout>
+            </Layout>
+        </Layout>
+    )
 }

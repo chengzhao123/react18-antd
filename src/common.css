@@ -8,11 +8,25 @@
   margin: 0 0;
   text-align: center;
 }
-.menuClassName {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  /* box-sizing: border-box;
-  border-right: 1px solid black; */
+.menuLogoDiv {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menuLogoDiv img {
+  width: 40px;
+}
+.menuLogoDiv span {
+  color: white;
+  font-weight: bolder;
+  font-size: 20px;
+}
+.navDiv {
+  background-color: white;
+}
+.contentDiv {
+  background-color: white;
+  margin-top: 40px;
+  padding: 20px;
 }
