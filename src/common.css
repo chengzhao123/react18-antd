@@ -5,7 +5,7 @@
   padding: 0;
 }
 .routerSpin {
-  margin: 0 0;
+  margin: 30% 0;
   text-align: center;
 }
 .menuLogoDiv {
@@ -23,10 +23,17 @@
   font-size: 20px;
 }
 .navDiv {
+  width: 100%;
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .contentDiv {
   background-color: white;
   margin-top: 40px;
   padding: 20px;
+}
+::-webkit-scrollbar {
+  width: 1px;
 }

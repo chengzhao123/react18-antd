@@ -1,11 +1,10 @@
-import React, { Suspense } from "react"
+import React from "react"
 import {
   HashRouter as Router,
   Routes,
   Route,
   Navigate
 } from "react-router-dom"
-import { Spin } from 'antd'
 import staticRouter from './staticRouter'
 import waveRouter from './waveRouter'
 function routerCom(value) {
@@ -19,7 +18,7 @@ function routerCom(value) {
   //如果存在子路由
   if (value.children) {
     return (
-      <Route key={value.path} path={value.path} exact={value.exact} element={<value.component />}>
+      <Route key={value.path} path={value.path} exact={value.exact} element={<value.component {...value} />}>
         {
           value.children.map(item => {
             return routerCom(item)
@@ -30,7 +29,7 @@ function routerCom(value) {
   }
   //不存在重定向和子路由
   return (
-    <Route key={value.path} path={value.path} exact={value.exact} element={<value.component />} />
+    <Route key={value.path} path={value.path} exact={value.exact} element={<value.component {...value} />} />
   )
 }
 /** 组件 **/
@@ -38,7 +37,7 @@ export default function Routers() {
   var routerList = [...staticRouter, ...waveRouter]
   return (
     <Router>
-      <Suspense fallback={<div className="routerSpin"><Spin tip="loading..." /></div>}>
+      {/* <Suspense fallback={<div className="routerSpin"><Spin tip="loading..." /></div>}> */}
         <Routes>
           {
             routerList.map(item => {
@@ -46,7 +45,7 @@ export default function Routers() {
             })
           }
         </Routes>
-      </Suspense>
+      {/* </Suspense> */}
     </Router>
   );
 }

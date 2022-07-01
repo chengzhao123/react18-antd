@@ -1,6 +1,14 @@
 import React from "react"
-export default function Page1() {
+import { Input, Button } from "antd"
+export default function Page1(props) {
+    console.log(props)
     return (
-        <div>这是Page1页面</div>
+        <div>
+            <div>
+                <Input placeholder="用户名" style={{maxWidth: 200}} />
+                <Button type="primary" round style={{marginLeft: 20}}>搜索</Button>
+                <Button type="primary" round style={{marginLeft: 20}}>添加</Button>
+            </div>
+        </div>
     )
 }

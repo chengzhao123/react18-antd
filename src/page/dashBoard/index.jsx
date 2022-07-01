@@ -1,9 +1,11 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { Outlet } from "react-router-dom"
+import { Layout } from 'antd'
 import MenuCom from '../../component/menu'
+import Nav from '../../component/nav'
 import waveRouter from "../../router/waveRouter"
 import logo from '../../logo.svg'
-import { Layout } from 'antd'
+import MyLoading from "../../component/loading"
 const { Header, Sider, Content } = Layout
 function getMenuList(list, arr) {
     list.map(itemOne => {
@@ -35,10 +37,14 @@ export default function DashBoard() {
                 />
             </Sider>
             <Layout>
-                <Header className="navDiv">add</Header>
+                <Header className="navDiv">
+                    <Nav/>
+                </Header>
                 <Layout>
                     <Content className="contentDiv">
-                        <Outlet />
+                        <Suspense fallback={<MyLoading/>}>
+                            <Outlet />
+                        </Suspense>
                     </Content>
                 </Layout>
             </Layout>
