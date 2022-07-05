@@ -1,4 +1,4 @@
-import React from "react"
+import React, {Suspense} from "react"
 import {
   HashRouter as Router,
   Routes,
@@ -7,6 +7,7 @@ import {
 } from "react-router-dom"
 import staticRouter from './staticRouter'
 import waveRouter from './waveRouter'
+import MyLoading from "../component/loading"
 function routerCom(value) {
   //如果存在重定向路由
   if (value.redirect) {
@@ -37,7 +38,7 @@ export default function Routers() {
   var routerList = [...staticRouter, ...waveRouter]
   return (
     <Router>
-      {/* <Suspense fallback={<div className="routerSpin"><Spin tip="loading..." /></div>}> */}
+      <Suspense fallback={<MyLoading/>}>
         <Routes>
           {
             routerList.map(item => {
@@ -45,7 +46,7 @@ export default function Routers() {
             })
           }
         </Routes>
-      {/* </Suspense> */}
+      </Suspense>
     </Router>
   );
 }

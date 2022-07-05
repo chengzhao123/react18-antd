@@ -10,7 +10,7 @@ const { Header, Sider, Content } = Layout
 function getMenuList(list, arr) {
     list.map(itemOne => {
         if (!itemOne.hidden) {
-            if (itemOne.children && itemOne.children.length) {
+            if (itemOne.children && itemOne.children.length > 0) {
                 arr.push({ key: itemOne.path, label: itemOne.title, children: [] })
                 return getMenuList(itemOne.children, arr[arr.length - 1].children)
             }

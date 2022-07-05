@@ -1,11 +1,14 @@
 import React, {useState} from "react"
 import { Menu } from "antd"
-import { useNavigate} from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 
 
 export default function MenuCom(props) {
     const navigate = useNavigate()
-    const [openKey, setOpenKey] = useState([''])
+    const location = useLocation()
+    const defaultSelectedKeys = location.pathname
+    const defaultOpenKeys = defaultSelectedKeys.split('/').length > 2 ? '/' + defaultSelectedKeys.split('/')[1] : defaultSelectedKeys
+    const [openKey, setOpenKey] = useState([defaultOpenKeys])
     function changeRouter(e) {
         navigate(e.key)
     }
@@ -15,10 +18,11 @@ export default function MenuCom(props) {
         } else {
             setOpenKey([''])
         }
-        
     }
     return (
         <Menu
+            defaultOpenKeys = {defaultOpenKeys}
+            defaultSelectedKeys = {defaultSelectedKeys}
             openKeys = {openKey}
             theme={props.theme}
             items={props.showMenuList}
